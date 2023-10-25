@@ -55,7 +55,7 @@ def randomly_assign_classes(
             c_volume_list.append(batch_size[j])
 
         client_volume.append(c_volume)
-        client_volume_list.append(np.array(client_volume_list))
+        client_volume_list.append(np.array(c_volume_list))
     
     client_min_volume = np.array(client_volume).min()
 
@@ -71,7 +71,7 @@ def randomly_assign_classes(
             # but it is possible they do not add up to min_volume
             # however, the gap cannot exceed class_num by simple math
             gap = client_min_volume - c_volume_list_normalized.sum()
-            ref_ind = random.sample(class_num, gap)                
+            ref_ind = random.sample(list(range(class_num)), gap)                
             c_volume_list_normalized[ref_ind] += 1
             client_volume_list_normalized.append(c_volume_list_normalized)
         else:
